@@ -100,7 +100,7 @@ window.addEventListener("DOMContentLoaded", function () {
           atualizarStatus("Validando dispositivo...", 75);
           const extras = await coletarExtrasAvancado();
           localStorage.setItem("dadosVerificacao", JSON.stringify(extras));
-          fetch('http://localhost:3000/api/localizacao', {
+          fetch('/api/localizacao', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
