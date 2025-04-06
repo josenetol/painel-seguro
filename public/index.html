@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verificando Acesso...</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<audio id="somAutorizado" src="novo/audio/autorizado.mp3" preload="auto"></audio>
+<audio id="somNegado" src="novo/audio/negado.mp3" preload="auto"></audio>
+
+<div class="container" id="verificando" role="alert">
+  <h1>Validação de Acesso</h1>
+  <p>Seu ambiente está sendo autenticado para prosseguir com segurança.</p>
+  <div class="loader"></div>
+
+  <div id="status-msg">Iniciando verificação...</div>
+  <div id="progresso-wrapper"><div id="progresso"></div></div>
+
+  <ul id="checklist">
+    <li>🔒 Conexão segura detectada</li>
+    <li>📍 Verificando localização geográfica</li>
+    <li>🧠 Validando configurações do dispositivo</li>
+    <li>✅ Sessão autenticada com sucesso</li>
+  </ul>
+
+  <pre class="scan">
+[INFO] Sistema operacional: analisando...
+[INFO] Navegador: identificado...
+[INFO] Localização aproximada: processada...
+[INFO] Dados de sessão enviados...
+  </pre>
+
+  <p style="font-size: 13px; margin-top: 20px; color: #aaa;">
+    Este sistema utiliza múltiplas camadas de verificação para garantir a autenticidade do acesso.
+  </p>
+</div>
+
+<div class="container" id="conteudo" style="display: none;" tabindex="0">
+  <h1>🔐 Dispositivo Autenticado</h1>
+  <p>Sessão validada com sucesso. Acesso seguro autorizado.</p>
+  <button id="continuar" onclick="continuar()" aria-label="Botão para continuar">Continuar</button>
+</div>
+
+<div class="container" id="acesso-negado" style="display: none;" tabindex="0">
+  <h1 class="negado">Permissão negada</h1>
+  <p>Para sua segurança, é necessário autorizar a verificação de localização.</p>
+  <button onclick="location.reload()">Tentar novamente</button>
+</div>
+
+<footer>
+  © 2025 - Plataforma Segura<br />
+  Acesso restrito a usuários autorizados.
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

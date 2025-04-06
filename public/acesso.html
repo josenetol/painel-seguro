@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área Restrita</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: linear-gradient(135deg, #141e30, #243b55);
+      --bg-panel: rgba(255, 255, 255, 0.05);
+      --text-primary: #ffffff;
+      --text-secondary: #cccccc;
+      --highlight: #00e1ff;
+      --button-bg: #00e1ff;
+      --button-text: #000;
+      --button-hover: #00bcd4;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-main);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      transition: background 0.5s, color 0.5s;
+      padding: 20px;
+    }
+
+    .painel {
+      background: var(--bg-panel);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      backdrop-filter: blur(14px);
+      width: 100%;
+      max-width: 600px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: aparecer 0.8s forwards ease-out;
+    }
+
+    @keyframes aparecer {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+      color: var(--highlight);
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      background: var(--highlight);
+      color: var(--button-text);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 15px;
+      margin: 10px auto;
+      display: inline-block;
+    }
+
+    .botoes {
+      margin-top: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 14px 22px;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--button-hover);
+      transform: scale(1.05);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.3);
+      text-align: center;
+    }
+
+    .dark {
+      --bg-main: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+      --bg-panel: rgba(255, 255, 255, 0.03);
+      --text-primary: #eee;
+      --text-secondary: #aaa;
+      --highlight: #1dd1a1;
+      --button-bg: #1dd1a1;
+      --button-hover: #10ac84;
+    }
+  </style>
+</head>
+<body>
+  <div class="painel">
+    <h1>🔐 Acesso Confirmado</h1>
+    <p>Bem-vindo, <strong id="nomeUsuario">Visitante</strong>!<br>Seu acesso foi validado com sucesso e sua sessão está ativa.</p>
+    <div class="badge" id="infoSistema">Nível de acesso: Autorizado</div>
+    <div class="botoes">
+      <button onclick="window.location.href='index.html'">🚪 Sair</button>
+      <button onclick="window.location.href='admin.html'">🛠 Painel Admin</button>
+      <button onclick="document.body.classList.toggle('dark')">🌙 Alternar Tema</button>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 - Sistema Seguro - Todos os direitos reservados
+  </footer>
+
+  <script>
+    const nome = localStorage.getItem("nome") || "Visitante";
+    const dados = JSON.parse(localStorage.getItem("dadosVerificacao") || '{}');
+
+    document.getElementById("nomeUsuario").textContent = nome;
+
+    if (dados.platform && dados.screenResolution) {
+      document.getElementById("infoSistema").textContent = `Sistema: ${dados.platform} | Resolução: ${dados.screenResolution}`;
+    }
+
+    // Expiração de sessão
+    setTimeout(() => {
+      alert("Sessão expirada. Redirecionando para o início...");
+      window.location.href = "index.html";
+    }, 15 * 60 * 1000); // 15 minutos
+  </script>
+</body>
+</html>
